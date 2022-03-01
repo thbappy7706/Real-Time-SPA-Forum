@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class LikeFactory extends Factory
@@ -11,10 +12,12 @@ class LikeFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition() :array
     {
         return [
-            //
+            'user_id' => function () {
+                return User::all()->random();
+            }
         ];
     }
 }

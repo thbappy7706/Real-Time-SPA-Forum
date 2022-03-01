@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class CategoryFactory extends Factory
 {
@@ -11,10 +12,12 @@ class CategoryFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition() :array
     {
+        $word = $this->faker->word;
         return [
-            //
+            'name' => $word,
+            'slug' => Str::slug($word)
         ];
     }
 }
