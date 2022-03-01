@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Like;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class LikeController extends Controller
+class ReplyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class LikeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Like  $like
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Like $like)
+    public function show($id)
     {
         //
     }
@@ -52,10 +52,10 @@ class LikeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Like  $like
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Like $like)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +64,10 @@ class LikeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Like  $like
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Like $like)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +75,10 @@ class LikeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Like  $like
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Like $like)
+    public function destroy($id)
     {
         //
     }
