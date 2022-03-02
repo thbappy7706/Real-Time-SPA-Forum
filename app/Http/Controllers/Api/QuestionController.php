@@ -3,10 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\QuestionResource;
+use App\Models\Question;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class QuestionController extends Controller
 {
+
+    protected $model;
+    public function __construct(Question $question)
+    {
+        $this->model = $question;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +24,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        return QuestionResource::collection($this->model->latest()->get());
     }
 
     /**
@@ -35,7 +45,15 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        $store = auth()->user()->question()->create($request->all());
+        $store = $this->model->create($request->all());
+        if ($store) {
+            return response("Created Successfully", Response::HTTP_CREATED);
+        }else{
+            return response("Failed", Response::HTTP_FAILED_DEPENDENCY);
+
+        }
+
     }
 
     /**
@@ -44,9 +62,9 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Question $question)
     {
-        //
+        return new QuestionResource($question);
     }
 
     /**
@@ -78,8 +96,9 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Question $question)
     {
-        //
+        $question->delete();
+        return response("Deleted",Response::HTTP_NO_CONTENT);
     }
 }
