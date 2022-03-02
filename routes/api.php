@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Api\QuestionController;
+use \App\Http\Controllers\Api\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,8 @@ use \App\Http\Controllers\Api\QuestionController;
 |
 */
 
-Route::apiResource('question',QuestionController::class);
+Route::apiResource('question', QuestionController::class);
+Route::apiResource('category', CategoryController::class);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
