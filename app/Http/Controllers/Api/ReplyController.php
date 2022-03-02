@@ -3,18 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Question;
+use App\Models\Reply;
 use Illuminate\Http\Request;
+use \Illuminate\Database\Eloquent\Collection;
+use Symfony\Component\HttpFoundation\Response;
 
 class ReplyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+
+    public function index(Question $question): Collection
     {
-        //
+        return $question->replies()->get();
     }
 
     /**
@@ -33,9 +34,15 @@ class ReplyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Question $question,Request $request): \Illuminate\Http\Response
     {
-        //
+        $reply = $question->replies()->create($request->all());
+        if ($reply){
+            return response('Created Successfully', Response::HTTP_CREATED);
+        }else{
+            return response("Failed to create", Response::HTTP_FAILED_DEPENDENCY);
+
+        }
     }
 
     /**
@@ -44,9 +51,9 @@ class ReplyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Question $question,Reply $reply)
     {
-        //
+       return  $reply;
     }
 
     /**
@@ -78,8 +85,9 @@ class ReplyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Question $question,Reply $reply)
     {
-        //
+        $reply->delete();
+        return response("Deleted",Response::HTTP_NO_CONTENT);
     }
 }
