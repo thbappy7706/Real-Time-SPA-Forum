@@ -3,83 +3,34 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Reply;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class LikeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function likeIt(Reply $reply): \Illuminate\Http\Response
     {
-        //
+       $reply = $reply->likes()->create([
+//           'user_id' => auth()->id(),
+           'user_id' => 1,
+       ]) ;
+       if ($reply)
+       {
+           return response('Liked', Response::HTTP_CREATED);
+       }else{
+           return response("Failed", Response::HTTP_FAILED_DEPENDENCY);
+       }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function unLikeIt(Reply $reply)
     {
-        //
+        $like = $reply->likes()->where('user_id',1)->first()->delete();
+        if ($like){
+            return response("Deleted", Response::HTTP_NO_CONTENT);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
