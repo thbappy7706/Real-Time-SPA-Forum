@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use function Symfony\Component\Translation\t;
 
 class AuthController extends Controller
 {
@@ -14,15 +16,9 @@ class AuthController extends Controller
         $this->middleware('JWT', ['except' => ['login','signup']]);
     }
 
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function login()
     {
         $credentials = request(['email', 'password']);
-
 
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
@@ -31,10 +27,15 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
-    public function signup(SignUpRequest $request)
+    public function signup(SignupRequest $request)
     {
-        User::create($request->all());
-        return $this->login($request);
+       $user =  User::create($request->all());
+       if ($user)
+       {
+           return $this->login($request);
+       }else{
+           return response()->json('Failed',\Symfony\Component\HttpFoundation\Response::HTTP_BAD_REQUEST);
+       }
     }
     /**
      * Get the authenticated User.
@@ -77,7 +78,6 @@ class AuthController extends Controller
      */
     protected function respondWithToken($token)
     {
-//        dd($token);
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
@@ -85,4 +85,5 @@ class AuthController extends Controller
             'user' => auth()->user()->name
         ]);
     }
+
 }
