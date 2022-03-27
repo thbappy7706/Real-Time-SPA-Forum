@@ -5,23 +5,23 @@
 
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
-            <v-btn flat>
+            <v-btn >
                 Forum
             </v-btn>
 
 
-            <v-btn flat>
+            <v-btn>
                 Ask Question
             </v-btn>
 
 
-            <v-btn flat>
+            <v-btn >
          Category
             </v-btn>
 
 
 
-            <v-btn flat>
+            <v-btn >
                 Login
             </v-btn>
         </v-toolbar-items>

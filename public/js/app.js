@@ -5378,13 +5378,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
-var routes = [{
-  path: '/foo',
-  component: Foo
-}, {
-  path: '/bar',
-  component: Bar
-}];
+var routes = [// { path: '/foo', component: Foo },
+  // { path: '/bar', component: Bar }
+];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: routes // short for `routes: routes`
 
@@ -28935,21 +28931,13 @@ var render = function () {
         "v-toolbar-items",
         { staticClass: "hidden-sm-and-down" },
         [
-          _c("v-btn", { attrs: { flat: "" } }, [
-            _vm._v("\n            Forum\n        "),
-          ]),
+          _c("v-btn", [_vm._v("\n            Forum\n        ")]),
           _vm._v(" "),
-          _c("v-btn", { attrs: { flat: "" } }, [
-            _vm._v("\n            Ask Question\n        "),
-          ]),
+          _c("v-btn", [_vm._v("\n            Ask Question\n        ")]),
           _vm._v(" "),
-          _c("v-btn", { attrs: { flat: "" } }, [
-            _vm._v("\n     Category\n        "),
-          ]),
+          _c("v-btn", [_vm._v("\n     Category\n        ")]),
           _vm._v(" "),
-          _c("v-btn", { attrs: { flat: "" } }, [
-            _vm._v("\n            Login\n        "),
-          ]),
+          _c("v-btn", [_vm._v("\n            Login\n        ")]),
         ],
         1
       ),

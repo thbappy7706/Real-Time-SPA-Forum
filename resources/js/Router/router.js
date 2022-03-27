@@ -4,8 +4,8 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-    { path: '/foo', component: Foo },
-    { path: '/bar', component: Bar }
+    // { path: '/foo', component: Foo },
+    // { path: '/bar', component: Bar }
 ]
 
 const router = new VueRouter({
