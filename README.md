@@ -3,3 +3,18 @@
 
 
 ## Laravel-VUEJS-PUSHER-SPA
+
+   ##vue
+
+=================================
+    
+1    composer require laravel/ui
+
+2 php artisan ui vue
+
+3 npm i , npm i vuetify
+
+4. npm i sass sass-loader deepmerge -D
+
+
+
