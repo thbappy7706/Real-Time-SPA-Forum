@@ -26,7 +26,7 @@ class LogController extends Controller
         $store = Valuestore::make(resource_path('logs\logs.json'));
         $storeLog =   json_encode($store->put($ip,$requestData)) ;
 
-        dd($storeLog);
+       return $storeLog;
 
     }
 }
