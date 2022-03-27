@@ -14,6 +14,7 @@ class QuestionController extends Controller
     protected $model;
     public function __construct(Question $question)
     {
+        $this->middleware('JWT',['except'=>['index','show']]);
         $this->model = $question;
     }
 

@@ -13,6 +13,11 @@ class ReplyController extends Controller
 {
 
 
+    public function __construct()
+    {
+        $this->middleware('JWT',['except'=>['index','show']]);
+    }
+
     public function index(Question $question): Collection
     {
         return $question->replies()->get();
