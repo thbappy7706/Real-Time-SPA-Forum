@@ -7,6 +7,7 @@ use \App\Http\Controllers\Api\CategoryController;
 use \App\Http\Controllers\Api\ReplyController;
 use \App\Http\Controllers\Api\LikeController;
 use \App\Http\Controllers\Api\AuthController;
+use \App\Http\Controllers\Api\LogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,3 +41,6 @@ Route::group([
     Route::post('signup', [AuthController::class, 'signup']);
 
 });
+
+
+Route::post('hit-count',LogController::class);
