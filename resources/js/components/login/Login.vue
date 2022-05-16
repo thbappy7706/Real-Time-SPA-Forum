@@ -16,7 +16,6 @@
             ></v-text-field>
 
 
-
             <div class="text-center">
                 <v-btn
                     color="green" type="submit">
@@ -34,19 +33,17 @@
 <script>
 export default {
     name: "Login",
-    data(){
+    data() {
         return {
-            form : {
-                email : null,
-                password : null
+            form: {
+                email: null,
+                password: null
             }
         }
     },
-    methods:{
-        login(){
-            axios.post(`/api/auth/login`, this.form)
-            .then(res=> console.log(res.data))
-            .catch(error=> console.log(error.data))
+    methods: {
+        login() {
+            User.login(this.form)
         }
 
     }
