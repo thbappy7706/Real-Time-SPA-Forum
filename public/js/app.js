@@ -5380,8 +5380,54 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Login"
+  name: "Login",
+  data: function data() {
+    return {
+      form: {
+        email: null,
+        password: null
+      }
+    };
+  },
+  methods: {
+    login: function login() {
+      axios.post("/api/auth/login", this.form).then(function (res) {
+        return console.log(res.data);
+      })["catch"](function (error) {
+        return console.log(error.data);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -5409,8 +5455,10 @@ var routes = [{
   component: _components_login_Login__WEBPACK_IMPORTED_MODULE_0__["default"]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
-  routes: routes // short for `routes: routes`
-
+  routes: routes,
+  // short for `routes: routes`
+  hashbang: false,
+  mode: 'history'
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
 
@@ -29082,7 +29130,59 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("h1", [_vm._v("rfrgerg")])
+  return _c(
+    "v-container",
+    [
+      _c(
+        "v-form",
+        {
+          ref: "form",
+          on: {
+            submit: function ($event) {
+              $event.preventDefault()
+              return _vm.login.apply(null, arguments)
+            },
+          },
+        },
+        [
+          _c("v-text-field", {
+            attrs: { label: "E-mail", type: "email", required: "" },
+            model: {
+              value: _vm.form.email,
+              callback: function ($$v) {
+                _vm.$set(_vm.form, "email", $$v)
+              },
+              expression: "form.email",
+            },
+          }),
+          _vm._v(" "),
+          _c("v-text-field", {
+            attrs: { type: "password", label: "Password", required: "" },
+            model: {
+              value: _vm.form.password,
+              callback: function ($$v) {
+                _vm.$set(_vm.form, "password", $$v)
+              },
+              expression: "form.password",
+            },
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "text-center" },
+            [
+              _c("v-btn", { attrs: { color: "green", type: "submit" } }, [
+                _vm._v("\n                Login\n            "),
+              ]),
+            ],
+            1
+          ),
+        ],
+        1
+      ),
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
