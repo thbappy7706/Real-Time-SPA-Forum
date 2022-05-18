@@ -5497,6 +5497,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Signup",
   data: function data() {
@@ -5506,13 +5512,18 @@ __webpack_require__.r(__webpack_exports__);
         email: null,
         password: null,
         password_confirmation: null
-      }
+      },
+      errors: {}
     };
   },
   methods: {
     signup: function signup() {
+      var _this = this;
+
       axios.post("/api/auth/signup", this.form).then(function (res) {
         return User.responseAfterLogin(res);
+      })["catch"](function (error) {
+        return _this.errors = error.response.data.errors;
       });
     }
   }
@@ -29630,7 +29641,7 @@ var render = function () {
           on: {
             submit: function ($event) {
               $event.preventDefault()
-              return _vm.Signup.apply(null, arguments)
+              return _vm.signup.apply(null, arguments)
             },
           },
         },
@@ -29646,6 +29657,12 @@ var render = function () {
             },
           }),
           _vm._v(" "),
+          _vm.errors.name
+            ? _c("span", { staticClass: "red--text" }, [
+                _vm._v(_vm._s(_vm.errors.name[0])),
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _c("v-text-field", {
             attrs: { label: "E-mail", type: "email", required: "" },
             model: {
@@ -29657,6 +29674,12 @@ var render = function () {
             },
           }),
           _vm._v(" "),
+          _vm.errors.email
+            ? _c("span", { staticClass: "red--text" }, [
+                _vm._v(_vm._s(_vm.errors.email[0])),
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _c("v-text-field", {
             attrs: { type: "password", label: "Password", required: "" },
             model: {
@@ -29667,6 +29690,12 @@ var render = function () {
               expression: "form.password",
             },
           }),
+          _vm._v(" "),
+          _vm.errors.password
+            ? _c("span", { staticClass: "red--text" }, [
+                _vm._v(_vm._s(_vm.errors.password[0])),
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _c("v-text-field", {
             attrs: {
@@ -29682,6 +29711,12 @@ var render = function () {
               expression: "form.password_confirmation",
             },
           }),
+          _vm._v(" "),
+          _vm.errors.password_confirmation
+            ? _c("span", { staticClass: "red--text" }, [
+                _vm._v(_vm._s(_vm.errors.password_confirmation[0])),
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "div",

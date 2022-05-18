@@ -27,7 +27,7 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
-    public function signup(Request $request)
+    public function signup(SignUpRequest $request)
     {
        $user =  User::create($request->all());
        if ($user)
