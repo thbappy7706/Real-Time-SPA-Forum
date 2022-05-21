@@ -1,26 +1,28 @@
 <template>
     <v-toolbar dense elevation="24" rounded>
 
+
         <v-toolbar-title style="color: #04414d;font-weight: bold">SPA FORUM</v-toolbar-title>
+
 
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
 
-                <v-btn >Forum</v-btn>
+            <router-link to="/forum">
+                <v-btn>
+                    Forum
+                </v-btn>
+            </router-link>
 
 
-
-          <v-btn>Ask Question</v-btn>
-
+            <v-btn>Ask Question</v-btn>
 
 
-
-
-                <v-btn >Category</v-btn>
+            <v-btn>Category</v-btn>
 
 
             <router-link to="/login">
-                <v-btn >
+                <v-btn>
                     Login
                 </v-btn>
             </router-link>
