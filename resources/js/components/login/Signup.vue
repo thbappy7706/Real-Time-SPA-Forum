@@ -7,7 +7,7 @@
                 type="text"
                 required
             ></v-text-field>
-            <span class="red--text" v-if="errors.name">{{errors.name[0]}}</span>
+            <span class="red--text" v-if="errors.name">{{ errors.name[0] }}</span>
 
 
             <v-text-field
@@ -16,7 +16,7 @@
                 type="email"
                 required
             ></v-text-field>
-            <span class="red--text" v-if="errors.email">{{errors.email[0]}}</span>
+            <span class="red--text" v-if="errors.email">{{ errors.email[0] }}</span>
 
 
             <v-text-field
@@ -25,7 +25,7 @@
                 label="Password"
                 required
             ></v-text-field>
-            <span class="red--text" v-if="errors.password">{{errors.password[0]}}</span>
+            <span class="red--text" v-if="errors.password">{{ errors.password[0] }}</span>
 
 
             <v-text-field
@@ -34,7 +34,7 @@
                 label="Password Confirmation"
                 required
             ></v-text-field>
-            <span class="red--text" v-if="errors.password_confirmation">{{errors.password_confirmation[0]}}</span>
+            <span class="red--text" v-if="errors.password_confirmation">{{ errors.password_confirmation[0] }}</span>
 
 
             <div class="text-center">
@@ -68,6 +68,11 @@ export default {
                 password_confirmation: null
             },
             errors: {}
+        }
+    },
+    created() {
+        if (User.loggedIn()) {
+            this.$router.push({name: 'forum'})
         }
     },
     methods: {
