@@ -12,7 +12,7 @@
                 :key="item.title"
                 :to="item.to"
                 v-if="item.show">
-                <v-btn flat>
+                <v-btn>
                   {{item.title}}
                 </v-btn>
             </router-link>
@@ -35,6 +35,11 @@ export default {
                 {title: 'Logout', to: '/logout', show: User.loggedIn()},
             ]
         }
+    },
+    created() {
+        EventBus.$on('logout', () =>{
+            User.logout()
+        })
     }
 }
 </script>
