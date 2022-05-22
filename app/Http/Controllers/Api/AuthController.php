@@ -7,6 +7,7 @@ use App\Http\Requests\SignUpRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use function Symfony\Component\Translation\t;
 
 class AuthController extends Controller
@@ -34,7 +35,7 @@ class AuthController extends Controller
        {
            return $this->login($request);
        }else{
-           return response()->json('Failed',\Symfony\Component\HttpFoundation\Response::HTTP_BAD_REQUEST);
+          return response()->json('Failed',\Symfony\Component\HttpFoundation\Response::HTTP_FAILED_DEPENDENCY);
        }
     }
     /**
