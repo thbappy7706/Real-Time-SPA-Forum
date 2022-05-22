@@ -1,10 +1,14 @@
 <template>
+<ShowQuestion :data = question>
 
+</ShowQuestion>
 </template>
 
 <script>
+import ShowQuestion from "./ShowQuestion";
 export default {
     name: "Read",
+    components: {ShowQuestion},
     data(){
         return{
             question:{}
