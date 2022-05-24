@@ -12,7 +12,8 @@ import vuetify from './vuetify';
 import router from './Router/router.js';
 
 import VueSimplemde from 'vue-simplemde'
-
+import md from 'marked';
+window.md = md;
 
 Vue.component('vue-simplemde', VueSimplemde)
 

@@ -27,8 +27,6 @@
 </template>
 
 <script>
-import md from 'marked';
-
 export default {
     name: "ShowQuestion",
     props: ['data'],
