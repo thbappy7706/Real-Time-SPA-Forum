@@ -5,6 +5,7 @@ import Signup from "../components/Auth/Signup";
 import Forum from "../components/forum/Forum";
 import Logout from "../components/Auth/Logout";
 import Read from "../components/forum/Read";
+import Create from "../components/forum/Create";
 
 Vue.use(VueRouter)
 
@@ -13,6 +14,7 @@ const routes = [
     {path: '/logout', component: Logout},
     {path: '/signup', component: Signup},
     {path: '/forum', component: Forum, name: 'forum'},
+    {path: '/ask', component: Create},
     {path: '/question/:slug', component: Read, name: 'read'},
 ]
 

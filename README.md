@@ -16,5 +16,7 @@
 
 4. npm i sass sass-loader deepmerge -D
 
+5.npm install vue-simplemde --save
+
 
 
