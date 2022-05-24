@@ -14,14 +14,17 @@
 
             <v-card-text v-html="body"></v-card-text>
 
-            <!--            <v-card-actions v-if="own">-->
-            <!--                <v-btn icon small @click="edit">-->
-            <!--                    <v-icon color="orange">edit</v-icon>-->
-            <!--                </v-btn>-->
-            <!--                <v-btn icon small @click="destroy">-->
-            <!--                    <v-icon color="red">delete</v-icon>-->
-            <!--                </v-btn>-->
-            <!--            </v-card-actions>-->
+
+            <v-card-actions v-if="own">
+                <v-btn class="mx-3" fab>
+                    <v-icon color="cyan" dark>mdi-pencil</v-icon>
+                </v-btn>
+
+                <v-btn class="mx-3" fab>
+                    <v-icon color="red" dark>mdi-delete</v-icon>
+                </v-btn>
+            </v-card-actions>
+
         </v-container>
     </v-card>
 </template>
@@ -30,6 +33,11 @@
 export default {
     name: "ShowQuestion",
     props: ['data'],
+    data(){
+        return{
+            own : User.own(this.data.user_id)
+        }
+    },
     computed: {
         body() {
             return md.parse(this.data.body)
