@@ -54,8 +54,9 @@ export default {
 
     methods: {
         createQuestion() {
-            axios.post(`/api/category`, this.form)
-                .then(res => console.log(res.data))
+            axios.post(`/api/question`, this.form)
+                .then(res => this.$router.push(res.data.path))
+                .catch(error => this.errors = error.response.data.error)
         }
     },
 }

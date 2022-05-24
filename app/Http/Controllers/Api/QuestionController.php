@@ -46,10 +46,9 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-//        $store = auth()->user()->question()->create($request->all());
-        $store = $this->model->create($request->all());
-        if ($store) {
-            return response("Created Successfully", Response::HTTP_CREATED);
+        $question = auth()->user()->questions()->create($request->all());
+        if ($question) {
+            return response(new QuestionResource($question), Response::HTTP_CREATED);
         }else{
             return response("Failed", Response::HTTP_FAILED_DEPENDENCY);
 
