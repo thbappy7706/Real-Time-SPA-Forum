@@ -20,7 +20,7 @@
                     <v-icon color="cyan" dark>mdi-pencil</v-icon>
                 </v-btn>
 
-                <v-btn class="mx-3" fab>
+                <v-btn class="mx-3" fab @click="destroyQuestion">
                     <v-icon color="red" dark>mdi-delete</v-icon>
                 </v-btn>
             </v-card-actions>
@@ -33,14 +33,22 @@
 export default {
     name: "ShowQuestion",
     props: ['data'],
-    data(){
-        return{
-            own : User.own(this.data.user_id)
+    data() {
+        return {
+            own: User.own(this.data.user_id)
         }
     },
     computed: {
         body() {
             return md.parse(this.data.body)
+        }
+    },
+
+    methods: {
+        destroyQuestion() {
+            axios.delete(`/api/question/${this.data.slug}`)
+                .then(res => this.$router.push('/forum'))
+                .catch(error => console.log(error.response.data))
         }
     }
 }
