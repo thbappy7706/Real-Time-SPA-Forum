@@ -1,5 +1,5 @@
 <template>
-<v-container>
+    <v-container>
 
         <v-form @submit.prevent="updateQuestion">
             <span class="red--text" v-if="errors.title">{{ errors.title[0] }}</span>
@@ -25,7 +25,7 @@
 
             <v-card-actions>
                 <v-btn class="mx-3" fab type="submit">
-                    <v-icon color="teal" dark>mdi-update </v-icon>
+                    <v-icon color="teal" dark>mdi-update</v-icon>
                 </v-btn>
 
                 <v-btn class="mx-3" fab @click="cancelEditing">
@@ -35,35 +35,35 @@
         </v-form>
 
 
-</v-container>
+    </v-container>
 </template>
 
 <script>
 export default {
-name: "EditQuestion",
-    props:['data'],
-    data(){
-    return{
-        form: {
-            title: null,
-            // category_id: null,
-            body: null
-        },
-        // categories: {},
-        errors: {}
-    }
+    name: "EditQuestion",
+    props: ['data'],
+    data() {
+        return {
+            form: {
+                title: null,
+                // category_id: null,
+                body: null
+            },
+            // categories: {},
+            errors: {}
+        }
     },
     created() {
-    this.form = this.data
+        this.form = this.data
     },
 
-    methods:{
-        cancelEditing(){
+    methods: {
+        cancelEditing() {
             EventBus.$emit('cancelEditing')
         },
-        updateQuestion(){
-            axios.patch(`/api/question/${this.data.slug}`,this.form)
-                 .then(res=>this.cancelEditing())
+        updateQuestion() {
+            axios.patch(`/api/question/${this.data.slug}`, this.form)
+                .then(res => this.cancelEditing())
 
         }
     }

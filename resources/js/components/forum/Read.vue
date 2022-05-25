@@ -2,9 +2,9 @@
     <div v-if="question">
         <EditQuestion v-if="editing" :data=question></EditQuestion>
 
-            <ShowQuestion v-else :data = question
-            ></ShowQuestion>
-        </div>
+        <ShowQuestion v-else :data=question
+        ></ShowQuestion>
+    </div>
 
 
 </template>
@@ -12,30 +12,31 @@
 <script>
 import ShowQuestion from "./ShowQuestion";
 import EditQuestion from "./EditQuestion";
+
 export default {
     name: "Read",
     components: {EditQuestion, ShowQuestion},
-    data(){
-        return{
-            question:null,
-            editing:false
+    data() {
+        return {
+            question: null,
+            editing: false
         }
     },
     created() {
-            this.listen();
-            this.getQuestion()
+        this.listen();
+        this.getQuestion()
     },
 
-    methods:{
-        listen(){
-            EventBus.$on('startEditing',()=>{
-                this.editing =  true;
+    methods: {
+        listen() {
+            EventBus.$on('startEditing', () => {
+                this.editing = true;
             })
-            EventBus.$on('cancelEditing',()=>{
-                this.editing =  false;
+            EventBus.$on('cancelEditing', () => {
+                this.editing = false;
             })
         },
-        getQuestion(){
+        getQuestion() {
             axios.get(`/api/question/${this.$route.params.slug}`)
                 .then(res => this.question = res.data.data)
         }

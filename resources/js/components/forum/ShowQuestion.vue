@@ -51,7 +51,7 @@ export default {
                 .catch(error => console.log(error.response.data))
         },
 
-        edit(){
+        edit() {
             EventBus.$emit('startEditing');
         }
     },
