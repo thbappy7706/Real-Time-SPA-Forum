@@ -12,7 +12,7 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     protected static function boot()
     {

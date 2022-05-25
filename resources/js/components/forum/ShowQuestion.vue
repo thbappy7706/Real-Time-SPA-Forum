@@ -16,7 +16,7 @@
 
 
             <v-card-actions v-if="own">
-                <v-btn class="mx-3" fab>
+                <v-btn class="mx-3" fab @click="edit">
                     <v-icon color="cyan" dark>mdi-pencil</v-icon>
                 </v-btn>
 
@@ -49,8 +49,12 @@ export default {
             axios.delete(`/api/question/${this.data.slug}`)
                 .then(res => this.$router.push('/forum'))
                 .catch(error => console.log(error.response.data))
+        },
+
+        edit(){
+            EventBus.$emit('startEditing');
         }
-    }
+    },
 }
 </script>
 
