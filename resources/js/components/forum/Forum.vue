@@ -9,13 +9,17 @@
 
                 </Question>
             </v-flex>
-            Sidebar
+
+            <v-flex xs4>
+                <AppSidebar></AppSidebar>
+            </v-flex>
         </v-layout>
     </v-container>
 </template>
 
 <script>
 import Question from "./Question";
+import AppSidebar from "./AppSidebar";
 
 export default {
     name: "Forum",
@@ -24,7 +28,7 @@ export default {
             questions: {},
         }
     },
-    components: {Question},
+    components: {AppSidebar, Question},
     created() {
         axios.get(`/api/question`)
             .then(res => this.questions = res.data.data)
