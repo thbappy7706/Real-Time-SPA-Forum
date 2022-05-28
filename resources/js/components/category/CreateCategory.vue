@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-form @submit.prevent="createCategory">
+        <v-form @submit.prevent="submitForm">
 
             <span class="red--text" v-if="errors.name">{{ errors.name[0] }}</span>
             <v-text-field
@@ -10,11 +10,8 @@
                 required
             ></v-text-field>
 
-            <v-btn
-                color="green"
-                type="submit"
-            >Create
-            </v-btn>
+            <v-btn color="orange" type="submit" v-if="editSlug">Update</v-btn>
+            <v-btn color="green" type="submit" v-else>Create</v-btn>
         </v-form>
 
 
@@ -31,7 +28,7 @@
                         </v-list-item-content>
 
                         <v-list-item-icon>
-                            <v-btn class="mx-2" small fab>
+                            <v-btn class="mx-2" small fab @click="editCategory(index)">
                                 <v-icon color="cyan" dark>mdi-pencil</v-icon>
                             </v-btn>
                             <v-btn class="mx-2" small fab @click="destroyCategory(category.slug,index)">
@@ -56,16 +53,24 @@ export default {
                 name: null,
             },
             errors: {},
-            categories: {}
+            categories: {},
+            editSlug: null,
         }
     },
 
     created() {
+        if (!User.admin()){
+            this.$router.push('/forum')
+        }
         axios.get(`/api/category`)
             .then(res => this.categories = res.data.data)
             .catch(error => (this.categories = error.response.data.errors));
     },
     methods: {
+        submitForm(){
+             this.editSlug ? this.updateCategory() : this.createCategory()
+        },
+
         createCategory() {
             axios.post(`/api/category`, this.form)
                 .then(res => {
@@ -73,6 +78,18 @@ export default {
                     this.form.name = null
                 })
                 .catch(error => this.errors = error.response.data.error)
+        },
+
+        editCategory(index){
+                   this.form.name = this.categories[index].name
+                   this.editSlug = this.categories[index].slug
+        },
+
+        updateCategory(){
+            axios.patch(`/api/category/${this.editSlug}`, this.form).then(res => {
+                this.categories.unshift(res.data);
+                this.form.name = null;
+            });
         },
         destroyCategory(slug, index) {
             axios.delete(`/api/category/${slug}`)
