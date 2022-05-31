@@ -4,18 +4,29 @@
 
         <ShowQuestion v-else :data=question
         ></ShowQuestion>
-    </div>
 
+        <v-container class="cardPos">
+            <div >
+                <Replies :replies="question.replies"></Replies>
+                <NewReply :questionSlug="question.slug"></NewReply>
+            </div>
+
+        </v-container>
+
+
+    </div>
 
 </template>
 
 <script>
 import ShowQuestion from "./ShowQuestion";
 import EditQuestion from "./EditQuestion";
+import Replies from "../reply/Replies";
+import NewReply from "../reply/NewReply";
 
 export default {
     name: "Read",
-    components: {EditQuestion, ShowQuestion},
+    components: {NewReply, Replies, EditQuestion, ShowQuestion},
     data() {
         return {
             question: null,
@@ -47,5 +58,7 @@ export default {
 </script>
 
 <style scoped>
-
+.cardPos{
+    margin-right: 30rem;
+}
 </style>

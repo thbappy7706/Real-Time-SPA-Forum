@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ReplyResource;
 use App\Models\Question;
 use App\Models\Reply;
 use Illuminate\Http\Request;
@@ -43,7 +44,7 @@ class ReplyController extends Controller
     {
         $reply = $question->replies()->create($request->all());
         if ($reply){
-            return response('Created Successfully', Response::HTTP_CREATED);
+            return response(['reply'=> new ReplyResource($reply)], Response::HTTP_CREATED);
         }else{
             return response("Failed to create", Response::HTTP_FAILED_DEPENDENCY);
 

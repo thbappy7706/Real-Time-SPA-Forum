@@ -29,7 +29,7 @@ class Question extends Model
 
     public function replies(): HasMany
     {
-        return $this->hasMany(Reply::class);
+        return $this->hasMany(Reply::class)->latest('id');
     }
 
     public function category(): BelongsTo
