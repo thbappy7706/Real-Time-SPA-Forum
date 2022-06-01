@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Reply;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class LikeController extends Controller
@@ -18,8 +19,7 @@ class LikeController extends Controller
     public function likeIt(Reply $reply): \Illuminate\Http\Response
     {
        $reply = $reply->likes()->create([
-//           'user_id' => auth()->id(),
-           'user_id' => 1,
+           'user_id' => auth()->id(),
        ]) ;
        if ($reply)
        {
@@ -31,7 +31,7 @@ class LikeController extends Controller
 
     public function unLikeIt(Reply $reply)
     {
-        $like = $reply->likes()->where('user_id',1)->first()->delete();
+        $like = $reply->likes()->where('user_id',Auth::id())->first()->delete();
         if ($like){
             return response("Deleted", Response::HTTP_NO_CONTENT);
         }
