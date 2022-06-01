@@ -1,5 +1,5 @@
 <template>
-    <v-toolbar  dark
+    <v-toolbar dark
                 prominent
                 src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
                 dense elevation="24" rounded>
