@@ -16,7 +16,7 @@ class ReplyController extends Controller
 
     public function __construct()
     {
-        $this->middleware('JWT',['except'=>['index','show']]);
+        $this->middleware('JWT',['except'=>['index','show','customDelete']]);
     }
 
     public function index(Question $question): Collection
@@ -95,5 +95,18 @@ class ReplyController extends Controller
     {
         $reply->delete();
         return response("Deleted",Response::HTTP_NO_CONTENT);
+    }
+
+
+    public function customDelete($id)
+    {
+       $reply = Reply::findOrFail($id);
+       $reply->delete();
+        if ($reply){
+            return response('Deleted Successfully', Response::HTTP_ACCEPTED);
+        }else{
+            return response("Failed to create", Response::HTTP_FAILED_DEPENDENCY);
+        }
+
     }
 }

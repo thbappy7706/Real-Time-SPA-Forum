@@ -23,6 +23,7 @@ use \App\Http\Controllers\Api\LogController;
 Route::apiResource('question', QuestionController::class);
 Route::apiResource('category', CategoryController::class);
 Route::apiResource('question/{question}/reply', ReplyController::class);
+Route::post('reply/delete/{id}', [ReplyController::class,'customDelete']);
 Route::post('like/{reply}', [LikeController::class, 'likeIt']);
 Route::delete('like/{reply}', [LikeController::class, 'unLikeIt']);
 

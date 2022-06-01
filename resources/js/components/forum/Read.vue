@@ -7,7 +7,7 @@
 
         <v-container class="cardPos">
             <div >
-                <Replies :replies="question.replies"></Replies>
+                <Replies :question="question"></Replies>
                 <NewReply :questionSlug="question.slug"></NewReply>
             </div>
 
