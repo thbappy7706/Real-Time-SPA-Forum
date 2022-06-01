@@ -1,8 +1,11 @@
 <template>
-    <v-toolbar dense elevation="24" rounded>
+    <v-toolbar  dark
+                prominent
+                src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+                dense elevation="24" rounded>
 
 
-        <v-toolbar-title style="color: #04414d;font-weight: bold">SPA FORUM</v-toolbar-title>
+        <v-toolbar-title style="color: white;font-family:Impact; font-size: 3.5rem">SPFORUM</v-toolbar-title>
 
 
         <v-spacer></v-spacer>
