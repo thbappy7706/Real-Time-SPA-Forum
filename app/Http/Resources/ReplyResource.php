@@ -20,6 +20,7 @@ class ReplyResource extends JsonResource
             'reply' => $this->body,
             'user' => $this->user->name,
             'user_id' => $this->user_id,
+            'question_slug' => $this->question->slug,
             'time' =>isset($this->created_at) ? $this->created_at->diffForHumans() : Carbon::now(),
 
         ];

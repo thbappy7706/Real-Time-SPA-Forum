@@ -16,7 +16,7 @@ class ReplyController extends Controller
 
     public function __construct()
     {
-        $this->middleware('JWT',['except'=>['index','show','customDelete']]);
+        $this->middleware('JWT',['except'=>['index','show','customDelete','customUpdate']]);
     }
 
     public function index(Question $question): Collection
@@ -80,9 +80,11 @@ class ReplyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id,Reply $reply,Question $question)
     {
-        //
+        dd("efewf");
+        $reply->update($request->all());
+        return response('Update', Response::HTTP_ACCEPTED);
     }
 
     /**
@@ -95,6 +97,17 @@ class ReplyController extends Controller
     {
         $reply->delete();
         return response("Deleted",Response::HTTP_NO_CONTENT);
+    }
+
+    public function customUpdate(Request $request,$id){
+        $reply = Reply::findOrFail($id);
+        $reply->update($request->all());
+        if ($reply){
+            return response('Updated Successfully', Response::HTTP_ACCEPTED);
+        }else{
+            return response("Failed to create", Response::HTTP_FAILED_DEPENDENCY);
+        }
+
     }
 
 
