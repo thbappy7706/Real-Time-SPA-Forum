@@ -5,7 +5,12 @@
                 dense elevation="24" rounded>
 
 
-        <v-toolbar-title style="color: white;font-family:Impact; font-size: 3.5rem">SPFORUM</v-toolbar-title>
+        <v-toolbar-title >
+           <router-link  class="text-decoration-none myStyle" to="/">
+               SPFORUM
+           </router-link>
+
+        </v-toolbar-title>
 
 
         <v-spacer></v-spacer>
@@ -48,10 +53,16 @@ export default {
 </script>
 
 <style scoped>
-.v-btn:not(.v-btn--round).v-size--default {
+.v-btn:not(.v-btn--round).v-size--default[data-v-b21dd180] {
     height: 50px;
     min-width: 64px;
-    padding: 5px 47px;
+    padding: 48px 47px;
     margin-right: 1rem;
+    background-color: transparent;
+    font-weight: bolder;
+    font-size: 1rem;
+}
+.myStyle{
+    color: white;font-family:Impact; font-size: 3.5rem
 }
 </style>

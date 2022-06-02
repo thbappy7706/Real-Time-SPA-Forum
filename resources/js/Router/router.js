@@ -7,10 +7,12 @@ import Logout from "../components/Auth/Logout";
 import Read from "../components/forum/Read";
 import Create from "../components/forum/Create";
 import CreateCategory from "../components/category/CreateCategory";
+import Parallex from "../components/Parallex";
 
 Vue.use(VueRouter)
 
 const routes = [
+    {path: '/', component: Parallex},
     {path: '/login', component: Login},
     {path: '/logout', component: Logout},
     {path: '/signup', component: Signup},
