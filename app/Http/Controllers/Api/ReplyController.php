@@ -82,7 +82,6 @@ class ReplyController extends Controller
      */
     public function update(Request $request, $id,Reply $reply,Question $question)
     {
-        dd("efewf");
         $reply->update($request->all());
         return response('Update', Response::HTTP_ACCEPTED);
     }
