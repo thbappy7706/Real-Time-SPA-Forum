@@ -12,8 +12,9 @@
 
         </v-toolbar-title>
 
-
         <v-spacer></v-spacer>
+        <AppNotification/>
+
         <v-toolbar-items class="hidden-sm-and-down">
             <router-link
                 v-for="item in items"
@@ -31,8 +32,10 @@
 </template>
 
 <script>
+import AppNotification from "./AppNotification";
 export default {
     name: "ToolBar",
+    components: {AppNotification},
     data() {
         return {
             items: [
