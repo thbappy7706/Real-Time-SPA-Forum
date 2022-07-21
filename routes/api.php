@@ -7,6 +7,7 @@ use \App\Http\Controllers\Api\CategoryController;
 use \App\Http\Controllers\Api\ReplyController;
 use \App\Http\Controllers\Api\LikeController;
 use \App\Http\Controllers\Api\AuthController;
+use \App\Http\Controllers\Api\NotificationController;
 use \App\Http\Controllers\Api\LogController;
 
 /*
@@ -27,6 +28,11 @@ Route::post('reply/delete/{id}', [ReplyController::class,'customDelete']);
 Route::post('question/reply/update/{id}', [ReplyController::class,'customUpdate']);
 Route::post('like/{reply}', [LikeController::class, 'likeIt']);
 Route::delete('like/{reply}', [LikeController::class, 'unLikeIt']);
+Route::post('notifications', NotificationController::class);
+Route::post('hello', function (){
+    dd(auth()->user()->unreadNotifications());
+});
+
 
 
 Route::group([

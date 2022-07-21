@@ -3,16 +3,23 @@
         <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
                 <v-btn large fab v-bind="attrs" v-on="on">
-                    <v-icon color="red" dark>mdi-bell</v-icon> 5
+                    <v-icon color="red" dark>mdi-bell</v-icon>
+                   5
                 </v-btn>
 
             </template>
             <v-list>
                 <v-list-item
-                    v-for="(item, index) in items"
-                    :key="index"
-                >
-                    <v-list-item-title>{{ item.title }}</v-list-item-title>
+                    v-for="(item, index) in unread"
+                    :key="index">
+                    <v-list-item-title>{{ item.data.question }}</v-list-item-title>
+                </v-list-item>
+                <v-divider></v-divider>
+
+                <v-list-item
+                    v-for="(item, index) in read"
+                    :key="index">
+                    <v-list-item-title>{{ item.data.question }}</v-list-item-title>
                 </v-list-item>
             </v-list>
         </v-menu>
@@ -22,14 +29,36 @@
 <script>
 export default {
     name: "AppNotification",
-    data: () => ({
-        items: [
-            { title: 'Click Me' },
-            { title: 'Click Me' },
-            { title: 'Click Me' },
-            { title: 'Click Me' },
-        ],
-    }),
+    data() {
+         return{
+             read: {},
+             unread: {},
+             unreadCount: 0,
+         }
+    },
+    created() {
+        if (User.loggedIn()) {
+            this.getNewNotifications()
+        }
+    },
+
+    methods: {
+        getNewNotifications() {
+            axios.post('/api/notifications')
+                 .then(res=>{
+                     this.read = res.data.read
+                     this.unread = res.data.unread
+                     this.unreadCount = res.data.unread.length
+                 })
+        }
+    },
+
+    // computed: {
+    //     color() {
+    //         return this.unreadCount > 0 ? "red" : "red lighten-2";
+    //     }
+    // }
+
 }
 </script>
 

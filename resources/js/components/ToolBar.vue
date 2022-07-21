@@ -13,7 +13,7 @@
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
-        <AppNotification/>
+        <AppNotification></AppNotification>
 
         <v-toolbar-items class="hidden-sm-and-down">
             <router-link
