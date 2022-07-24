@@ -4,7 +4,7 @@
             <template v-slot:activator="{ on, attrs }">
                 <v-btn large fab v-bind="attrs" v-on="on">
                     <v-icon color="red" dark>mdi-bell</v-icon>
-                   {{unreadCount}}
+                    {{ unreadCount }}
                 </v-btn>
 
             </template>
@@ -12,15 +12,21 @@
                 <v-list-item
                     v-for="(item, index) in unread"
                     :key="index">
-                    <v-list-item-title>{{JSON.parse(item.data).question}}</v-list-item-title>
-
+                    <router-link :to="JSON.parse(item.data).path">
+                        <v-list-item-title @click="readNotification(item.id)">
+                            {{ JSON.parse(item.data).question }}
+                        </v-list-item-title>
+                    </router-link>
                 </v-list-item>
+
                 <v-divider></v-divider>
 
                 <v-list-item
                     v-for="(item, index) in read"
                     :key="index">
-                    <v-list-item-title>{{JSON.parse(item.data).question}}</v-list-item-title>
+                    <router-link :to="JSON.parse(item.data).path">
+                        <v-list-item-title>{{ JSON.parse(item.data).question }}</v-list-item-title>
+                    </router-link>
                 </v-list-item>
             </v-list>
         </v-menu>
@@ -31,11 +37,11 @@
 export default {
     name: "AppNotification",
     data() {
-         return{
-             read: {},
-             unread: {},
-             unreadCount: 0,
-         }
+        return {
+            read: {},
+            unread: {},
+            unreadCount: 0,
+        }
     },
     created() {
         if (User.loggedIn()) {
@@ -46,12 +52,16 @@ export default {
     methods: {
         getNewNotifications() {
             axios.post('/api/notifications')
-                 .then(res=>{
-                     console.log(res.data.unread)
-                     this.read = res.data.read
-                     this.unread = res.data.unread
-                     this.unreadCount = res.data.unreadCount
-                 })
+                .then(res => {
+                    console.log(res.data.unread)
+                    this.read = res.data.read
+                    this.unread = res.data.unread
+                    this.unreadCount = res.data.unreadCount
+                })
+        },
+
+        readNotification(id){
+          axios.post(`/api/read-notification/${id}`)
         }
     },
 
