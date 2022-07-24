@@ -13,7 +13,7 @@
                     v-for="(item, index) in unread"
                     :key="index">
                     <router-link :to="JSON.parse(item.data).path">
-                        <v-list-item-title @click="readNotification(item.id)">
+                        <v-list-item-title @click="readNotification(item.id,item.data)">
                             {{ JSON.parse(item.data).question }}
                         </v-list-item-title>
                     </router-link>
@@ -60,8 +60,14 @@ export default {
                 })
         },
 
-        readNotification(id){
+        readNotification(id,notifyData){
+            console.log(notifyData)
           axios.post(`/api/read-notification/${id}`)
+            .then(res=>{
+                this.unread.splice(notifyData,1)
+                this.read.push(notifyData)
+                this.unreadCount--
+            })
         }
     },
 
