@@ -4,7 +4,7 @@
             <template v-slot:activator="{ on, attrs }">
                 <v-btn large fab v-bind="attrs" v-on="on">
                     <v-icon color="red" dark>mdi-bell</v-icon>
-                   5
+                   {{unreadCount}}
                 </v-btn>
 
             </template>
@@ -12,14 +12,15 @@
                 <v-list-item
                     v-for="(item, index) in unread"
                     :key="index">
-                    <v-list-item-title>{{ item.data.question }}</v-list-item-title>
+                    <v-list-item-title>{{JSON.parse(item.data).question}}</v-list-item-title>
+
                 </v-list-item>
                 <v-divider></v-divider>
 
                 <v-list-item
                     v-for="(item, index) in read"
                     :key="index">
-                    <v-list-item-title>{{ item.data.question }}</v-list-item-title>
+                    <v-list-item-title>{{JSON.parse(item.data).question}}</v-list-item-title>
                 </v-list-item>
             </v-list>
         </v-menu>
@@ -46,9 +47,10 @@ export default {
         getNewNotifications() {
             axios.post('/api/notifications')
                  .then(res=>{
+                     console.log(res.data.unread)
                      this.read = res.data.read
                      this.unread = res.data.unread
-                     this.unreadCount = res.data.unread.length
+                     this.unreadCount = res.data.unreadCount
                  })
         }
     },
