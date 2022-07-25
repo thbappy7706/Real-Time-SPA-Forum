@@ -12,9 +12,9 @@
                 <v-list-item
                     v-for="(item, index) in unread"
                     :key="index">
-                    <router-link :to="JSON.parse(item.data).path">
+                    <router-link :to="item.path">
                         <v-list-item-title @click="readNotification(item.id,item.data)">
-                            {{ JSON.parse(item.data).question }}
+                            {{ item.question }}
                         </v-list-item-title>
                     </router-link>
                 </v-list-item>
@@ -24,8 +24,8 @@
                 <v-list-item
                     v-for="(item, index) in read"
                     :key="index">
-                    <router-link :to="JSON.parse(item.data).path">
-                        <v-list-item-title>{{ JSON.parse(item.data).question }}</v-list-item-title>
+                    <router-link :to="item.path">
+                        <v-list-item-title>{{ item.question }}</v-list-item-title>
                     </router-link>
                 </v-list-item>
             </v-list>
